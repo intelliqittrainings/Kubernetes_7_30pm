@@ -1,0 +1,31 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    author: intelliqit
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      author: intelliqit
+  template:
+    metadata:
+      name: nginx-pod
+      labels:
+        author: intelliqit
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: disk
+                    operator: In
+                    values:
+                      - intelliqit
+...

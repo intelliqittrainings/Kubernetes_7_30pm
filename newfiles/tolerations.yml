@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql-pod
+  labels:
+    author: intelliqit
+spec:
+  containers:
+    - name: mydb
+      image: mysql
+      env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: intelliqit
+  tolerations:
+    - key: node
+      operator: Equal
+      value: intelliqit
+      effect: NoSchedule

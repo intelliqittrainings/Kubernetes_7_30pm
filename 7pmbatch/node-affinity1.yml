@@ -1,0 +1,25 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+  labels:
+    type: proxy
+    author: intelliqit
+spec:
+  containers:
+    - name: mynginx
+      image: nginx
+      ports:
+        - containerPort: 80
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: slave1
+                operator: In
+                values:
+                  - intelliqit1
+...
+        

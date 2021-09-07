@@ -1,0 +1,29 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: redis-deployment
+ labels:
+  type: db
+  author: intelliqit
+spec:
+ replicas: 3
+ selector:
+  matchLabels:
+   type: db
+ template:
+  metadata:
+   name: redis-pod
+   labels:
+    type: db
+  spec:
+   containers:
+    - name: redis
+      image: redis
+      volumeMounts:
+       - name: redis-volume
+         mountPath: /data/redis
+   volumes:
+    - name: redis-volume
+      emptyDir: {}
+...

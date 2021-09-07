@@ -1,0 +1,22 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: tomme-deployment
+ labels:
+  type: appserver
+spec:
+ replicas: 2
+ selector:
+  matchLabels:
+   type: appserver
+ template:
+  metadata:
+   name: tomee-pod
+   labels:
+    type: appserver
+  spec:
+   containers:
+    - name: mytomee
+      image: tomee
+

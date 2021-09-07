@@ -1,0 +1,43 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: posgres-deployment
+ labels:
+  type: mydb
+  author: intelliqit
+spec:
+ replicas: 2
+ selector:
+  matchLabels:
+   type: mydb
+ template:
+  metadata:
+   name: postgres-pod
+   labels:
+    type: mydb
+  spec:
+   containers:
+    - name: mypostgres
+      image: postgres
+      ports:
+       - containerPort: 5432
+      env:
+       - name: POSTGRES_PASSWORD
+         valueFrom:
+          secretKeyRef:
+           name: postgres-secrets
+           key: password
+       - name: POSTGRES_USER
+         valueFrom:
+          secretKeyRef:
+           name: postgres-secrets
+           key: user
+       - name: POSTGRES_DB
+         valueFrom:
+          secretKeyRef:
+           name: postgres-secrets
+           key: db
+...
+
+

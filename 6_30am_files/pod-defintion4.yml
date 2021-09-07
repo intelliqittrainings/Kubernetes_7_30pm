@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+ name: jdk-pod
+ namespace: test-ns
+ labels:
+  author: krishna
+spec:
+ containers:
+  - name: java
+    image: openjdk:12

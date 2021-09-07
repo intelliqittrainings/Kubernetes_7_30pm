@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql-pod
+  labels:
+    author: krishna
+spec:
+  containers:
+    - name: mydb
+      image: mysql:5
+      env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: krishna
+  tolerations:
+    - key: "slave_id"
+      value: "slave3"
+      effect: "NoSchedule"
+

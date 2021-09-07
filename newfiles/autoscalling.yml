@@ -1,0 +1,16 @@
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: nginx-autoscaller
+  labels:
+    author: intelliqit
+spec:
+  minReplicas: 1
+  maxReplicas: 10
+  scaleTargetRef:
+    apiVersion: extensions/v1beta
+    kind: Deployment
+    name: nginx-deployment
+  targetCPUUtilizationPercentage: 50
+...
